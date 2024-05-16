@@ -1,6 +1,5 @@
+import '../../features/authentication/presentation/login.dart';
 import 'package:flutter/material.dart';
-
-import 'onboarding_survey_screen.dart';
 
 class OnboardingFullScreen extends StatefulWidget {
   const OnboardingFullScreen({super.key});
@@ -106,7 +105,7 @@ class _OnboardingFullScreenState extends State<OnboardingFullScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const OnboardingSurveyScreen(),
+                                    const LoginScreen(),
                               ));
                         }
                       },

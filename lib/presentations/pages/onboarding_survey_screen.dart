@@ -1,17 +1,17 @@
-import 'package:fitness_app/presentations/pages/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../widgets/title_with_caption.dart';
+import 'result_screen.dart';
 
-class OnboardingSurveyScreen extends StatefulWidget {
-  const OnboardingSurveyScreen({super.key});
+class SurveyScreen extends StatefulWidget {
+  const SurveyScreen({super.key});
 
   @override
-  State<OnboardingSurveyScreen> createState() => _OnboardingSurveyScreenState();
+  State<SurveyScreen> createState() => _SurveyScreenState();
 }
 
-class _OnboardingSurveyScreenState extends State<OnboardingSurveyScreen> {
+class _SurveyScreenState extends State<SurveyScreen> {
   final FocusNode nameFocusNode = FocusNode();
   final FocusNode ageFocusNode = FocusNode();
   final FocusNode weightFocusNode = FocusNode();
