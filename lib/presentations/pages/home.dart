@@ -1,3 +1,4 @@
+import 'package:fitness_app/features/diet_or_workout_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -173,37 +174,60 @@ class MyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12.0),
-              topRight: Radius.circular(12.0),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailsScreen(
+                  imageUrl: imageUrl,
+                  heading: heading,
+                  description: description),
+            ));
+      },
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                topRight: Radius.circular(12.0),
+              ),
+              child: Hero(
+                tag: 'image-$heading',
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  height: 150,
+                ),
+              ),
             ),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              height: 150,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: 'heading-$heading',
+                    child: Text(heading,
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
+                  const SizedBox(height: 8),
+                  Hero(
+                    tag: 'description-$heading',
+                    child: Text(description,
+                        style: Theme.of(context).textTheme.bodySmall),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(heading, style: Theme.of(context).textTheme.headlineSmall),
-                const SizedBox(height: 8),
-                Text(description, style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
