@@ -1,6 +1,7 @@
-import 'package:fitness_app/presentations/pages/onboarding_survey_screen.dart';
+import 'package:fitness_app/presentations/pages/onboarding_fullscreen.dart';
 import 'package:flutter/material.dart';
 
+import 'presentations/pages/onboarding_survey_screen.dart';
 import 'presentations/widgets/title_with_caption.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Fitness app'),
+      home: const OnboardingFullScreen(),
+      // const MyHomePage(title: 'Fitness app'),
     );
   }
 }
