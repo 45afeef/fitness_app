@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/pages/onboarding_survey_screen.dart';
+import '../../../presentations/pages/survey_screen.dart';
 import '../../../presentations/widgets/title_with_caption.dart';
 
 class LoginScreen extends StatefulWidget {
