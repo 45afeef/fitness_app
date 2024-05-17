@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/pages/survey_screen.dart';
-import '../../../presentations/widgets/title_with_caption.dart';
+import '../../bmi_calculator/survey_screen.dart';
+import '../../../widgets/title_with_caption.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

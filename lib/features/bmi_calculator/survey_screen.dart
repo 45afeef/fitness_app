@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/title_with_caption.dart';
+import '../../widgets/title_with_caption.dart';
 import 'result_screen.dart';
 
 class SurveyScreen extends StatefulWidget {
