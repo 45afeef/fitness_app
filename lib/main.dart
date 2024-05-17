@@ -1,3 +1,4 @@
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'features/onboarding/onboarding_screen.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Fitness app',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -21,8 +22,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const OnboardingFullScreen(),
-      // const MyHomePage(title: 'Fitness app'),
+      routerConfig: appRouter,
     );
   }
 }
