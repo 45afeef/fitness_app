@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'presentations/pages/onboarding_fullscreen.dart';
+import 'features/onboarding/onboarding_fullscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurpleAccent,
-          background:Colors.amber[50],
+          background: Colors.amber[50],
         ),
         useMaterial3: true,
       ),

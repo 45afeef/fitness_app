@@ -1,5 +1,6 @@
-import '../../features/authentication/presentation/login.dart';
 import 'package:flutter/material.dart';
+
+import '../authentication/presentation/login.dart';
 
 class OnboardingFullScreen extends StatefulWidget {
   const OnboardingFullScreen({super.key});
@@ -91,6 +92,8 @@ class _OnboardingFullScreenState extends State<OnboardingFullScreen> {
                                   color: Colors.red,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
+                              child: const AnimatedSwitcher(
+                                  duration: Duration.zero),
                             ),
                           )),
                   const Spacer(),
@@ -104,8 +107,7 @@ class _OnboardingFullScreenState extends State<OnboardingFullScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const LoginScreen(),
+                                builder: (context) => const LoginScreen(),
                               ));
                         }
                       },
