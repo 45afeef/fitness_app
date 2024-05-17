@@ -1,7 +1,38 @@
+import 'package:fitness_app/presentations/pages/survey_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String? name;
+  String? age;
+  String? weight;
+  String? height;
+  String? bmi;
+
+  void _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    name = prefs.getString('name') ?? '';
+    age = prefs.getString('age') ?? '';
+    weight = prefs.getString('weight') ?? '';
+    height = prefs.getString('height') ?? '';
+    bmi = prefs.getString('bmi') ?? '';
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +49,26 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 150,
                 backgroundImage: NetworkImage(
                     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&auto=format&crop=faces&h=500&w=500&fit=crop'),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
-                'Username',
-                style: TextStyle(
+                '$name',
+                style: const TextStyle(
                   fontSize: 22,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
-              Text(
+              const SizedBox(height: 4),
+              const Text(
                 'User Bio',
                 style: TextStyle(
                   fontSize: 16,
@@ -45,9 +76,18 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               // Add more widgets for the profile information as needed
-              Profilekeyvalues('Weight', '60'),
-              Profilekeyvalues('Height', '150 cm'),
-              Profilekeyvalues('Age', '38'),
+              Profilekeyvalues('Weight', '$weight kg'),
+              Profilekeyvalues('Height', '$height cm'),
+              Profilekeyvalues('Age', '$age'),
+              Profilekeyvalues('My Current BMI', '$bmi'),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SurveyScreen()));
+                  },
+                  child: const Text('Recalculate BMI'))
             ],
           ),
         ),

@@ -1,4 +1,4 @@
-import 'package:fitness_app/features/diet_or_workout_details_screen.dart';
+import 'package:fitness_app/features/home/diet_or_workout_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../profile/profile_screen.dart';
@@ -10,11 +10,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: const SizedBox(),
+          title: const Text('My Fitness Tracker'),
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileScreen()));
                 },
                 icon: const Icon(Icons.account_circle))
           ],

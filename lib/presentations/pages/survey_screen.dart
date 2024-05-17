@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/title_with_caption.dart';
 import 'result_screen.dart';
@@ -21,6 +22,31 @@ class _SurveyScreenState extends State<SurveyScreen> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
+
+  // Function to load data
+  void _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    _nameController.text = prefs.getString('name') ?? '';
+    _ageController.text = prefs.getString('age') ?? '';
+    _weightController.text = prefs.getString('weight') ?? '';
+    _heightController.text = prefs.getString('height') ?? '';
+  }
+
+  // Function to save data
+  void _saveData(double bmi) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', _nameController.text);
+    await prefs.setString('age', _ageController.text);
+    await prefs.setString('weight', _weightController.text);
+    await prefs.setString('height', _heightController.text);
+    await prefs.setString('bmi', bmi.toStringAsFixed(2));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +130,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
                       double bmi = int.parse(weight) /
                           ((int.parse(height) / 100) *
                               (int.parse(height) / 100));
+
+                      _saveData(bmi);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
