@@ -1,4 +1,4 @@
-import 'package:fitness_app/presentations/pages/home.dart';
+import 'package:fitness_app/features/home/home_screen.dart';
 import 'package:fitness_app/presentations/widgets/title_with_caption.dart';
 import 'package:flutter/material.dart';
 

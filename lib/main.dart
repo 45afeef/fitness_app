@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/onboarding/onboarding_fullscreen.dart';
+import 'features/onboarding/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());

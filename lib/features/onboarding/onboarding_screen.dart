@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../authentication/presentation/login.dart';
+import '../authentication/presentation/login_screen.dart';
 
 class OnboardingFullScreen extends StatefulWidget {
   const OnboardingFullScreen({super.key});
