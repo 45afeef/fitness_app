@@ -1,6 +1,7 @@
-import 'package:fitness_app/features/home/home_screen.dart';
-import 'package:fitness_app/widgets/title_with_caption.dart';
 import 'package:flutter/material.dart';
+
+import '../../widgets/title_with_caption.dart';
+import '../home/home_screen.dart';
 
 class BMIScreen extends StatelessWidget {
   const BMIScreen({

@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:fitness_app/features/home/diet_or_workout_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../profile/profile_screen.dart';
+import 'diet_or_workout_details_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

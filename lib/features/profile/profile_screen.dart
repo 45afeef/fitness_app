@@ -1,6 +1,7 @@
-import 'package:fitness_app/features/bmi_calculator/survey_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../bmi_calculator/survey_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
