@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -88,7 +90,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         MaterialPageRoute(
                             builder: (context) => const SurveyScreen()));
                   },
-                  child: const Text('Recalculate BMI'))
+                  child: const Text('Recalculate BMI')),
+              ElevatedButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                    appRouter.go(ScreenPaths.splash);
+                  },
+                  child: const Text('Logout')),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../authentication/presentation/login_screen.dart';
+import '../bmi_calculator/survey_screen.dart';
 
 class OnboardingFullScreen extends StatefulWidget {
   const OnboardingFullScreen({super.key});
@@ -107,7 +107,7 @@ class _OnboardingFullScreenState extends State<OnboardingFullScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
+                                builder: (context) => const SurveyScreen(),
                               ));
                         }
                       },

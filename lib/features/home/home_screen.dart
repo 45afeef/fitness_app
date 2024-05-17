@@ -230,7 +230,7 @@ class MyCard extends StatelessWidget {
                   onPlay: (controller) => controller.repeat(),
                 )
                 .shimmer(
-                    delay: Random().nextInt(2).seconds, duration: 1.seconds),
+                    delay: Random().nextInt(5).seconds, duration: Random().nextInt(5).seconds),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

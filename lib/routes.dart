@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_app/features/authentication/presentation/auth_gate.dart';
 import 'package:fitness_app/features/home/home_screen.dart';
 import 'package:fitness_app/features/splash/spalsh_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,10 +12,14 @@ class ScreenPaths {
   static const String home = '/home';
 }
 
-final appRouter = GoRouter(routes: [
-  AppRoute(ScreenPaths.splash, (_) => const SignUpScreen()),
-  AppRoute(ScreenPaths.home, (s) => const HomePage()),
-]);
+final appRouter = GoRouter(
+  routes: [
+    AppRoute(ScreenPaths.splash, (_) => const SplashScreen()),
+    AppRoute(ScreenPaths.login, (s) => const LoginPage()),
+    AppRoute(ScreenPaths.home, (s) => const HomePage()),
+  ],
+  
+);
 
 /// Custom GoRoute sub-class to make the router declaration easier to read
 class AppRoute extends GoRoute {

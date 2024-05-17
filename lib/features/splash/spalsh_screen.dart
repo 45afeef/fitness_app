@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class SignUpScreen extends StatelessWidget {
                   height: 100,
                   color: Colors.purple,
                   colorBlendMode: BlendMode.multiply,
-                ), // Logo at the left
+                ),
                 const SizedBox(width: 10), // Spacing between logo and text
                 const Text(
                   'Fitness App', // Name at the right
@@ -31,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            ).animate().scale(duration: 1.seconds),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 50),
@@ -46,17 +49,42 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20), // Spacing between text and button
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
+                StreamBuilder<User?>(
+                  stream: FirebaseAuth.instance.authStateChanges(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return const Text(
+                        'Authentication Error\nPlease re-install the application',
+                        style: TextStyle(color: Colors.white),
+                      );
+                    }
+
+                    if (snapshot.hasData) {
+                      Future.delayed(
+                        4.seconds,
+                        () => appRouter.go(ScreenPaths.home),
+                      );
+                      return const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      );
+                    }
+
+                    return ElevatedButton(
+                      onPressed: () {
+                        appRouter.go(ScreenPaths.login);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.purple,
+                        backgroundColor: Colors.white, // Text color is purple
+                      ),
+                      child: const Text(
+                        'SIGN UP OR LOGIN WITH GMAIL',
+                      ),
+                    );
                   },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.purple,
-                    backgroundColor: Colors.white, // Text color is purple
-                  ),
-                  child: const Text(
-                    'SIGN UP OR LOGIN WITH GMAIL',
-                  ),
                 ),
               ],
             ),
