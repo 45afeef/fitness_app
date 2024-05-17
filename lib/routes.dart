@@ -1,5 +1,5 @@
 import 'package:fitness_app/features/home/home_screen.dart';
-import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
+import 'package:fitness_app/features/splash/spalsh_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +11,7 @@ class ScreenPaths {
 }
 
 final appRouter = GoRouter(routes: [
-  AppRoute(ScreenPaths.splash, (_) => const OnboardingFullScreen()),
+  AppRoute(ScreenPaths.splash, (_) => const SignUpScreen()),
   AppRoute(ScreenPaths.home, (s) => const HomePage()),
 ]);
 
