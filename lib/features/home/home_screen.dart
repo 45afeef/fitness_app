@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:fitness_app/features/home/diet_or_workout_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../profile/profile_screen.dart';
 
@@ -222,7 +225,12 @@ class MyCard extends StatelessWidget {
                   height: 150,
                 ),
               ),
-            ),
+            )
+                .animate(
+                  onPlay: (controller) => controller.repeat(),
+                )
+                .shimmer(
+                    delay: Random().nextInt(2).seconds, duration: 1.seconds),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
