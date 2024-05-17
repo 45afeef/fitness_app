@@ -26,6 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
             if (email.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Please enter the email address')));
+            } else if (!email.contains('@') || !email.contains('.')) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Enter a valid email address')));
             } else if (password.isEmpty || password.length < 8) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text(
@@ -45,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
           image: DecorationImage(
             image: AssetImage('assets/images/2.jpg'),
             opacity: 0.1,
-            fit: BoxFit.cover, 
+            fit: BoxFit.cover,
           ),
         ),
         child: Center(
