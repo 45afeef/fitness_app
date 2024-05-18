@@ -1,4 +1,6 @@
+import 'package:fitness_app/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bmi_calculator/survey_screen.dart';
 
@@ -62,7 +64,7 @@ class _OnboardingFullScreenState extends State<OnboardingFullScreen> {
         ),
         child: SafeArea(
             child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -98,16 +100,21 @@ class _OnboardingFullScreenState extends State<OnboardingFullScreen> {
                           )),
                   const Spacer(),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (currentItemIndex + 1 < items.length) {
                           setState(() {
                             currentItemIndex++;
                           });
                         } else {
+                          final prefs = await SharedPreferences.getInstance();
+                          String? bmi = prefs.getString('bmi');
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SurveyScreen(),
+                                builder: (context) => bmi != null
+                                    ? const HomePage()
+                                    : const SurveyScreen(),
                               ));
                         }
                       },

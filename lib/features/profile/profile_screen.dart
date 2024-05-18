@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +26,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     weight = prefs.getString('weight') ?? '';
     height = prefs.getString('height') ?? '';
     bmi = prefs.getString('bmi') ?? '';
+    setState(() {});
+  }
+
+  void _clearData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.remove('name');
+    prefs.remove('age');
+    prefs.remove('weight');
+    prefs.remove('height');
+    prefs.remove('bmi');
     setState(() {});
   }
 
@@ -93,8 +103,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: const Text('Recalculate BMI')),
               ElevatedButton(
                   onPressed: () {
+                    _clearData();
                     FirebaseAuth.instance.signOut();
-                    appRouter.go(ScreenPaths.splash);
+                    Navigator.pop(context);
                   },
                   child: const Text('Logout')),
             ],

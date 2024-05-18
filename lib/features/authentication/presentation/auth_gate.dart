@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' hide PhoneAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../onboarding/onboarding_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({

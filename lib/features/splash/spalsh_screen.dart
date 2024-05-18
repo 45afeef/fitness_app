@@ -61,7 +61,7 @@ class SplashScreen extends StatelessWidget {
 
                     if (snapshot.hasData) {
                       Future.delayed(
-                        4.seconds,
+                        5.seconds,
                         () => appRouter.go(ScreenPaths.home),
                       );
                       return const Padding(
