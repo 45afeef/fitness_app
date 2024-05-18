@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/features/authentication/presentation/auth_gate.dart';
+import 'package:fitness_app/features/authentication/presentation/auth_screen.dart';
 import 'package:fitness_app/features/home/home_screen.dart';
-import 'package:fitness_app/features/splash/spalsh_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +13,7 @@ class ScreenPaths {
 
 final appRouter = GoRouter(
   routes: [
-    AppRoute(ScreenPaths.splash, (_) => const SplashScreen()),
+    AppRoute(ScreenPaths.splash, (_) => const AuthScreen()),
     AppRoute(ScreenPaths.login, (s) => const LoginPage()),
     AppRoute(ScreenPaths.home, (s) => const HomePage()),
   ],
