@@ -1,13 +1,170 @@
 import 'dart:math';
 
+import 'package:fitness_app/features/home/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../profile/profile_screen.dart';
 import 'diet_or_workout_details_screen.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const NotFoundPage(),
+    const NotFoundPage(),
+    const NotFoundPage(),
+    const ProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: const SizedBox(),
+        title: const Text('My Fitness Tracker'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+              },
+              icon: const Icon(Icons.account_circle))
+        ],
+      ),
+      body: SafeArea(
+        child: _pages[_selectedIndex],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.red,
+        unselectedItemColor: Colors.green[200],
+        selectedItemColor: Colors.green,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Programs',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Premium',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.trending_up),
+            label: 'Progress',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class MyCard extends StatelessWidget {
+  final String imageUrl;
+  final String heading;
+  final String description;
+
+  const MyCard({
+    super.key,
+    required this.imageUrl,
+    required this.heading,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailsScreen(
+                  imageUrl: imageUrl,
+                  heading: heading,
+                  description: description),
+            ));
+      },
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                topRight: Radius.circular(12.0),
+              ),
+              child: Hero(
+                tag: 'image-$heading',
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  height: 150,
+                ),
+              ),
+            )
+                .animate(
+                  onPlay: (controller) => controller.repeat(),
+                )
+                .shimmer(
+                    delay: Random().nextInt(5).seconds,
+                    duration: Random().nextInt(5).seconds),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: 'heading-$heading',
+                    child: Text(heading,
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
+                  const SizedBox(height: 8),
+                  Hero(
+                    tag: 'description-$heading',
+                    child: Text(description,
+                        style: Theme.of(context).textTheme.bodySmall),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -93,124 +250,29 @@ class HomePage extends StatelessWidget {
         ]
       }
     ];
-    return Scaffold(
-        appBar: AppBar(
-          leading: const SizedBox(),
-          title: const Text('My Fitness Tracker'),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileScreen()));
-                },
-                icon: const Icon(Icons.account_circle))
-          ],
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView(
-              children: [
-                ...planSections.map(
-                  (section) => Column(children: [
-                    const SizedBox(height: 64),
-                    Text(
-                      section['title'],
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                    const SizedBox(height: 24),
-                    ...section['plans'].map(
-                      (p) => MyCard(
-                        imageUrl: p['imageUrl'],
-                        heading: p['heading'],
-                        description: p['description'],
-                      ),
-                    )
-                  ]),
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        children: [
+          ...planSections.map(
+            (section) => Column(children: [
+              const SizedBox(height: 64),
+              Text(
+                section['title'],
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              const SizedBox(height: 24),
+              ...section['plans'].map(
+                (p) => MyCard(
+                  imageUrl: p['imageUrl'],
+                  heading: p['heading'],
+                  description: p['description'],
                 ),
-              ],
-            ),
+              )
+            ]),
           ),
-        ));
-  }
-}
-
-class MyCard extends StatelessWidget {
-  final String imageUrl;
-  final String heading;
-  final String description;
-
-  const MyCard({
-    super.key,
-    required this.imageUrl,
-    required this.heading,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailsScreen(
-                  imageUrl: imageUrl,
-                  heading: heading,
-                  description: description),
-            ));
-      },
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(12.0),
-                topRight: Radius.circular(12.0),
-              ),
-              child: Hero(
-                tag: 'image-$heading',
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                  height: 150,
-                ),
-              ),
-            )
-                .animate(
-                  onPlay: (controller) => controller.repeat(),
-                )
-                .shimmer(
-                    delay: Random().nextInt(5).seconds,
-                    duration: Random().nextInt(5).seconds),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Hero(
-                    tag: 'heading-$heading',
-                    child: Text(heading,
-                        style: Theme.of(context).textTheme.headlineSmall),
-                  ),
-                  const SizedBox(height: 8),
-                  Hero(
-                    tag: 'description-$heading',
-                    child: Text(description,
-                        style: Theme.of(context).textTheme.bodySmall),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
