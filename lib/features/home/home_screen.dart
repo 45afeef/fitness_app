@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
     const NotFoundPage(),
     const NotFoundPage(),
     const NotFoundPage(),
-    const ProfileScreen(),
   ];
 
   @override
@@ -71,10 +70,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.trending_up),
             label: 'Progress',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,

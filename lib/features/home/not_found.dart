@@ -9,8 +9,11 @@ class NotFoundPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset('assets/images/not_found.jpg'),
-        const Text('Content Not available'),
+        Image.asset(
+          'assets/images/not_found.jpg',
+          color: Theme.of(context).colorScheme.background,
+          colorBlendMode: BlendMode.multiply,
+        ),
       ],
     );
   }
