@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class NotFoundPage extends StatelessWidget {
@@ -10,7 +12,7 @@ class NotFoundPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/not_found.jpg',
+          'assets/images/not_found_${Random().nextInt(3) + 1}}.jpg',
           color: Theme.of(context).colorScheme.background,
           colorBlendMode: BlendMode.multiply,
         ),
