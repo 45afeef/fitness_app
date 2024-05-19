@@ -1,20 +1,20 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
-import 'package:fitness_app/features/authentication/presentation/auth_view.dart';
-import 'package:fitness_app/features/authentication/provider/auth_provider.dart';
 import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+import '../provider/auth_provider.dart';
+
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -23,27 +23,29 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 150, 12, 12),
-        child: Form(
-          key: formKey,
+      body: Form(
+        key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Spacer(),
               Text(
-                'Hello 👋',
+                'Welcome 👋 \nSign Up now ',
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
+              const Gap(40),
               Text(
-                'Welcom back, You have been missed during this time',
+                'You are one step away from the fit future. \nSign up now and enjoy the happines of fit life',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.black,
                     ),
               ),
+              const Gap(40),
               CustomTextField(
                   enabled: !isLoging,
                   emailController: emailController,
@@ -57,6 +59,7 @@ class _LoginViewState extends State<LoginView> {
                     }
                     return null; // Valid email
                   }),
+              const Gap(10),
               CustomTextField(
                 enabled: !isLoging,
                 emailController: passwordController,
@@ -70,6 +73,7 @@ class _LoginViewState extends State<LoginView> {
                   return null; // Valid password
                 },
               ),
+              const Gap(40),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -91,18 +95,22 @@ class _LoginViewState extends State<LoginView> {
                             isLoging = true;
                           });
 
+                          final authProvider =
+                              Provider.of<AuthProvider>(context, listen: false);
+
                           try {
-                            final provider = Provider.of<AuthProvider>(context,
-                                listen: false);
-                            final userCredential = await provider
-                                .handleSignInEmail(email, password);
-                            if (userCredential.user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const OnboardingFullScreen()),
-                              );
+                            final credentials = await authProvider
+                                .handSignUpEmail(email, password);
+
+                            if (credentials.user != null) {
+                              setState(() {
+                                isLoging = false;
+                              });
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (c) {
+                                return const OnboardingFullScreen();
+                              }));
                             }
                           } on FirebaseAuthException catch (e) {
                             print(e);
@@ -143,47 +151,9 @@ class _LoginViewState extends State<LoginView> {
                           color: Colors.black,
                         ),
                       )
-                    : const Text('Login Now'),
+                    : const Text('Sign Up'),
               ),
-              const Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Gap(12),
-                  Icon(
-                    Icons.star_border_purple500_rounded,
-                    color: Colors.grey,
-                  ),
-                  Gap(12),
-                  Text('OR'),
-                  Gap(12),
-                  Icon(
-                    Icons.star_border_purple500_rounded,
-                    color: Colors.grey,
-                  ),
-                  Gap(12),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              SocialButton(
-                onPressed: () {},
-                child: Image.asset(
-                  'assets/images/google.png',
-                  width: 24,
-                  height: 24,
-                ),
-              ),
+              const Spacer(),
             ],
           ),
         ),

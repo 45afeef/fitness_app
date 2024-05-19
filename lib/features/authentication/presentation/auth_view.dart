@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 
+import 'signup_view.dart';
+
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
@@ -103,7 +105,10 @@ class AuthScreen extends StatelessWidget {
             ),
             foregroundColor: Colors.black,
             minimumSize: const Size(260, 40)),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const SignUpView()));
+        },
         child: const Text('Sign Up'),
       ).animate().fade(delay: 900.milliseconds),
       Row(

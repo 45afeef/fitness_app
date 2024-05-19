@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/features/authentication/presentation/auth_gate.dart';
 import 'package:fitness_app/features/authentication/presentation/auth_view.dart';
 import 'package:fitness_app/features/home/home_screen.dart';
@@ -13,11 +14,14 @@ class ScreenPaths {
 
 final appRouter = GoRouter(
   routes: [
-    AppRoute(ScreenPaths.splash, (_) => const AuthScreen()),
+    AppRoute(
+        ScreenPaths.splash,
+        (_) => FirebaseAuth.instance.currentUser != null
+            ? const HomePage()
+            : const AuthScreen()),
     AppRoute(ScreenPaths.login, (s) => const LoginPage()),
     AppRoute(ScreenPaths.home, (s) => const HomePage()),
   ],
-  
 );
 
 /// Custom GoRoute sub-class to make the router declaration easier to read
