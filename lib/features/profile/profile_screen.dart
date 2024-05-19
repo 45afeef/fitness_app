@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_app/features/authentication/presentation/login_view.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -105,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: () {
                     _clearData();
                     FirebaseAuth.instance.signOut();
-                    Navigator.pop(context);
+                    clearAndNavigate(context, ScreenPaths.splash);
                   },
                   child: const Text('Logout')),
             ],

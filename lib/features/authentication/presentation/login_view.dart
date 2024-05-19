@@ -2,9 +2,10 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:fitness_app/features/authentication/presentation/auth_view.dart';
 import 'package:fitness_app/features/authentication/provider/auth_provider.dart';
-import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
@@ -97,12 +98,7 @@ class _LoginViewState extends State<LoginView> {
                             final userCredential = await provider
                                 .handleSignInEmail(email, password);
                             if (userCredential.user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const OnboardingFullScreen()),
-                              );
+                              clearAndNavigate(context,ScreenPaths.intro);
                             }
                           } on FirebaseAuthException catch (e) {
                             print(e);
@@ -227,4 +223,11 @@ class CustomTextField extends StatelessWidget {
       ),
     );
   }
+}
+
+void clearAndNavigate(BuildContext context, String path) {
+  while (GoRouter.of(context).canPop()) {
+    GoRouter.of(context).pop();
+  }
+  GoRouter.of(context).pushReplacement(path);
 }

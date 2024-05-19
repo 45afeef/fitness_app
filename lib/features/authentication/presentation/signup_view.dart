@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
-import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
+import 'package:fitness_app/features/authentication/presentation/login_view.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -106,11 +107,7 @@ class _SignUpViewState extends State<SignUpView> {
                               setState(() {
                                 isLoging = false;
                               });
-
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (c) {
-                                return const OnboardingFullScreen();
-                              }));
+                              clearAndNavigate(context, ScreenPaths.intro);
                             }
                           } on FirebaseAuthException catch (e) {
                             print(e);
