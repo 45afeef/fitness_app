@@ -31,11 +31,18 @@ class PlanModel {
 
   factory PlanModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    // Convert the string to an enum
+    PlanCategory planCategory = PlanCategory.values.firstWhere(
+      (s) => s.toString().split('.').last == snapshot['category'],
+      orElse: () => PlanCategory
+          .normal, // Provide a default value in case the string doesn't match
+    );
+
     return PlanModel(
       imageUrl: snapshot['imageUrl'],
       heading: snapshot['heading'],
       description: snapshot['description'],
-      // category: snapshot['category'],
+      category: planCategory,
     );
   }
 }

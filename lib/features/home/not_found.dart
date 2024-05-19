@@ -12,7 +12,10 @@ class NotFoundPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/not_found_${Random().nextInt(3) + 1}}.jpg',
+          'assets/images/not_found_${[
+            '1.jpg',
+            '2.png',
+          ][Random().nextInt(2)]}',
           color: Theme.of(context).colorScheme.background,
           colorBlendMode: BlendMode.multiply,
         ),

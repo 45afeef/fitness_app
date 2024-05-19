@@ -65,6 +65,18 @@ class PlanCard extends StatelessWidget {
                     child: Text(model.heading,
                         style: Theme.of(context).textTheme.headlineSmall),
                   ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.green[100],
+                    ),
+                    child: Text(
+                      model.category.name,
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   Hero(
                     tag: 'description-${model.heading}',
