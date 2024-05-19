@@ -1,7 +1,10 @@
 import 'package:fitness_app/features/authentication/presentation/login_view.dart';
+import 'package:fitness_app/features/authentication/provider/auth_provider.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 import 'signup_view.dart';
 
@@ -148,7 +151,15 @@ class AuthScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SocialButton(
-            onPressed: () {},
+            onPressed: () async {
+              final userCredentials =
+                  await Provider.of<AuthProvider>(context, listen: false)
+                      .signInWithGoogle();
+
+              if (userCredentials?.user != null) {
+                clearAndNavigate(context, ScreenPaths.intro);
+              }
+            },
             child: Image.asset(
               'assets/images/google.png',
               width: 24,

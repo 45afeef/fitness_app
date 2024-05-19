@@ -98,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                             final userCredential = await provider
                                 .handleSignInEmail(email, password);
                             if (userCredential.user != null) {
-                              clearAndNavigate(context,ScreenPaths.intro);
+                              clearAndNavigate(context, ScreenPaths.intro);
                             }
                           } on FirebaseAuthException catch (e) {
                             print(e);
@@ -173,7 +173,15 @@ class _LoginViewState extends State<LoginView> {
                 ],
               ),
               SocialButton(
-                onPressed: () {},
+                onPressed: () async {
+                  final userCredentials =
+                      await Provider.of<AuthProvider>(context, listen: false)
+                          .signInWithGoogle();
+
+                  if (userCredentials?.user != null) {
+                    clearAndNavigate(context, ScreenPaths.intro);
+                  }
+                },
                 child: Image.asset(
                   'assets/images/google.png',
                   width: 24,
