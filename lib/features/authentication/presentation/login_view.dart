@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:fitness_app/features/authentication/presentation/auth_view.dart';
+import 'package:fitness_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -82,7 +83,6 @@ class _LoginViewState extends State<LoginView> {
                             formKey.currentState!.validate()) {
                           final email = emailController.text;
                           final password = passwordController.text;
-                          print('Email: $email, Password: $password');
 
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Loging in...')));
@@ -91,11 +91,17 @@ class _LoginViewState extends State<LoginView> {
                             isLoging = true;
                           });
 
-                          Future.delayed(
-                              Durations.extralong4,
-                              () => setState(() {
-                                    isLoging = false;
-                                  }));
+                          Future.delayed(const Duration(seconds: 5), () {
+                            setState(() {
+                              isLoging = false;
+                            });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const OnboardingFullScreen()),
+                            );
+                          });
                         }
                       },
                 child: isLoging
