@@ -1,20 +1,17 @@
 import 'dart:math';
 
+import 'package:fitness_app/features/feed/models/plan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../home/diet_or_workout_details_screen.dart';
 
 class PlanCard extends StatelessWidget {
-  final String imageUrl;
-  final String heading;
-  final String description;
+  final PlanModel model;
 
   const PlanCard({
     super.key,
-    required this.imageUrl,
-    required this.heading,
-    required this.description,
+    required this.model,
   });
 
   @override
@@ -30,9 +27,9 @@ class PlanCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => DetailsScreen(
-                    imageUrl: imageUrl,
-                    heading: heading,
-                    description: description),
+                    imageUrl: model.imageUrl,
+                    heading: model.heading,
+                    description: model.description),
               ));
         },
         child: Column(
@@ -44,9 +41,9 @@ class PlanCard extends StatelessWidget {
                 topRight: Radius.circular(12.0),
               ),
               child: Hero(
-                tag: 'image-$heading',
+                tag: 'image-${model.heading}',
                 child: Image.network(
-                  imageUrl,
+                  model.imageUrl,
                   fit: BoxFit.cover,
                   height: 150,
                 ),
@@ -64,14 +61,14 @@ class PlanCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Hero(
-                    tag: 'heading-$heading',
-                    child: Text(heading,
+                    tag: 'heading-${model.heading}',
+                    child: Text(model.heading,
                         style: Theme.of(context).textTheme.headlineSmall),
                   ),
                   const SizedBox(height: 8),
                   Hero(
-                    tag: 'description-$heading',
-                    child: Text(description,
+                    tag: 'description-${model.heading}',
+                    child: Text(model.description,
                         style: Theme.of(context).textTheme.bodySmall),
                   ),
                 ],
@@ -83,5 +80,3 @@ class PlanCard extends StatelessWidget {
     );
   }
 }
-
-
