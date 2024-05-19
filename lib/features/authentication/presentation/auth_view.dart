@@ -1,3 +1,4 @@
+import 'package:fitness_app/features/authentication/presentation/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -86,7 +87,13 @@ class AuthScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginView(),
+              ));
+        },
         child: const Text('Login'),
       ).animate().fade(delay: 700.milliseconds),
       TextButton(

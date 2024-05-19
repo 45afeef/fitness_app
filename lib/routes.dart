@@ -1,5 +1,5 @@
 import 'package:fitness_app/features/authentication/presentation/auth_gate.dart';
-import 'package:fitness_app/features/authentication/presentation/auth_screen.dart';
+import 'package:fitness_app/features/authentication/presentation/auth_view.dart';
 import 'package:fitness_app/features/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
