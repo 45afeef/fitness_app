@@ -32,7 +32,7 @@ class _FeedScreenState extends State<FeedScreen> {
         } else if (bmi > 30) {
           categoryString = 'obesity';
         } else {
-          categoryString = 'underweight';
+          categoryString = 'underWeight';
         }
       });
     });
